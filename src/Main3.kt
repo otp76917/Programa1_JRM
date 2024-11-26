@@ -22,8 +22,10 @@ fun main()
 //funcion para comprobar los array
 fun check(a:CharArray) : Boolean
 {
+    //hacemos una lista para pasar los caracteres ya recorridos
     var list:MutableList<Int> = mutableListOf()
 
+    //se comprueban todos los caracteres hasta que uno coincida
     for (i in a.indices)
     {
         if (!list.contains(i))
@@ -32,6 +34,7 @@ fun check(a:CharArray) : Boolean
             list.add(i)
             when (c)
             {
+                //se busca por detras el caracter que coincida
                 '{' -> if (!detras(a,c,list)) return false
                 '[' -> if (!detras(a,c,list)) return false
                 '(' -> if (!detras(a,c,list)) return false
@@ -41,10 +44,11 @@ fun check(a:CharArray) : Boolean
             }
         }
     }
-    return true  // temporary
+    return true
 }
 
 //funcion para contar por detras
+//le pasamos el array, caracter a comprobar y la lista de los que ya recorrimos
 fun detras(a:CharArray,char:Char,list:MutableList<Int>) : Boolean
 {
     for (i in a.indices.reversed())
