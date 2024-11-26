@@ -28,9 +28,38 @@ fun check(a:CharArray) : Boolean
     {
         if (!list.contains(i))
         {
-            //val c=
-                //when
+            val c = a[i]
+            list.add(i)
+            when (c)
+            {
+                '{' -> if (!detras(a,c,list)) return false
+                '[' -> if (!detras(a,c,list)) return false
+                '(' -> if (!detras(a,c,list)) return false
+                ')' -> return false
+                ']' -> return false
+                '}' -> return false
+            }
         }
     }
     return true  // temporary
+}
+
+//funcion para contar por detras
+fun detras(a:CharArray,char:Char,list:MutableList<Int>) : Boolean
+{
+    for (i in a.indices.reversed())
+    {
+        if (!list.contains(i))
+        {
+            val c = a[i]
+            list.add(i)
+            when (c)
+            {
+                ')' -> return '('==char
+                ']' -> return '['==char
+                '}' -> return '{'==char
+            }
+        }
+    }
+    return false
 }
