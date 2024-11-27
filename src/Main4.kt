@@ -25,10 +25,19 @@ fun main()
     val strArray8 = arrayOf("saltar", "saltar", "saltar", "saltar", "saltar")
     val charArray8 = "||_||".toCharArray()
 
+    //metemos las variables en los metodos
+    check(strArray1,charArray1)
+    check(strArray2,charArray2)
+    check(strArray3,charArray3)
+    check(strArray4,charArray4)
+    check(strArray5,charArray5)
+    check(strArray6,charArray6)
+    check(strArray7,charArray7)
+    check(strArray8,charArray8)
 
 }
 
-//metodo con la logica
+//metodo que ordena los parametros de entrada en funcion de cual es mas largo para evitar errores
 fun check(strArray:Array<String>,charArray:CharArray)
 {
     if (strArray.size>charArray.size) str(strArray,charArray)
@@ -36,21 +45,44 @@ fun check(strArray:Array<String>,charArray:CharArray)
 
 }
 
+//las dos funciones restantes son en esencia la misma funcion
+//la primera contrasta las cadenas contra caracteres y la segunda a la inversa
+//luego en caso de que no este en rango se pone el interrogante
+
 fun str(strArray:Array<String>,charArray:CharArray)
 {
     var bool = true
     for (i in strArray.indices)
     {
-        when (strArray[i])
+        if (i in charArray.indices)
         {
-            "correr" ->if ;
-            "saltar" ->
+            when (strArray[i])
+            {
+                "correr" -> if (charArray[i]=='_') print('_') else {print('/') ; bool=false}
+                "saltar" -> if (charArray[i]=='|') print('|') else {print('x') ; bool=false}
+            }
         }
+        else {print('?') ; bool=false}
+
     }
-    println("   "+bool)
+    println("   $bool")
 }
 
 fun char(strArray:Array<String>,charArray:CharArray)
 {
-    
+    var bool = true
+    for (i in charArray.indices)
+    {
+        if (i in strArray.indices)
+        {
+            when (charArray[i])
+            {
+                '_' -> if (strArray[i]=="correr") print('_') else {print('x') ; bool=false}
+                '|' -> if (strArray[i]=="saltar") print('|') else {print('/') ; bool=false}
+            }
+        }
+        else {print('?') ; bool=false}
+
+    }
+    println("   $bool")
 }
